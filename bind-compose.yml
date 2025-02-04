@@ -1,0 +1,30 @@
+# ==========================================================================
+# 
+version: '3.5'
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+services:
+  dns:
+#    image: internetsystemsconsortium/bind9:9.18
+    image: ubuntu/bind9:9.18-23.10_edge
+    hostname: dns
+    container_name: dns
+#    restart: always
+    ports:
+      - 53:53
+      - 953:953
+    volumes:
+      - /work/pschneider/github/ptschneider/my-ctr-dns/huachuca.lan/conf:/etc/bind
+      - /work/pschneider/github/ptschneider/my-ctr-dns/huachuca.lan/work:/var/cache/bind
+      - /work/pschneider/github/ptschneider/my-ctr-dns/huachuca.lan/zone:/var/lib/bind
+      - /work/pschneider/github/ptschneider/my-ctr-dns/huachuca.lan/log:/var/log
+    networks:
+      default:
+        ipv4_address: 172.27.10.250
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+networks:
+  default:
+    name: huachuca.lan
+    external: true
+#
+# ==========================================================================

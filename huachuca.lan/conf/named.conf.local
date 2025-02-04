@@ -1,0 +1,12 @@
+// be authoritative for the lan forward and reverse zones
+// n.b.the path below is from the perspective of inside the container 
+// 
+
+zone "huachuca.lan" {
+	type master;
+	file "/etc/bind/db.huachuca.lan";
+};
+
+
+
+

@@ -1,0 +1,51 @@
+acl internals {
+        127.0.0.1;
+	10.5.1.0/24;
+	172.16.0.0/16;
+	172.17.0.0/16;
+	172.18.0.0/16;
+	172.19.0.0/16;
+	172.20.0.0/16;
+	172.27.0.0/16;
+	172.28.0.0/16;
+	172.29.0.0/16;
+	172.30.0.0/16;
+	172.31.0.0/16;
+};
+
+options {
+	directory "/var/cache/bind";
+
+	 forwarders {
+	 	10.5.1.3;
+	 	10.5.1.23;
+	//	208.67.222.222; # dns.sse.cisco.com
+	//	208.67.220.220; # dns.sse.cisco.com
+	 };
+
+	//========================================================================
+	// If BIND logs error messages about the root key being expired,
+	// you will need to update your keys.  See https://www.isc.org/bind-keys
+	//========================================================================
+	// dnssec-validation auto;
+	dnssec-validation no;
+
+        // this option no longer exists
+	// filter-aaaa-on-v4 yes;
+
+        // qname-minimization off;
+
+	// listen-on-v6 { any; };
+	listen-on-v6 { none; };
+
+	// allow-query { internals; externals; };
+	allow-query { internals; };
+
+	allow-transfer { localhost; };
+
+	allow-recursion { internals; };
+
+	auth-nxdomain no;    # conform to RFC1035
+};
+
+

@@ -1,0 +1,50 @@
+# ==========================================================================
+#
+# of all the randomass systemd nonsense...
+#
+# you have to run the following for buildkit to start functioning, it is brokeass by default
+#
+# sudo systemctl enable --now buildkit
+#
+#
+# 
+# this is kinda expecting /var/lib/registry to be mounted on a dedicated vdisk/lun
+# depengin upon how many images you plan to cache in it
+#
+version: '3.5'
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+services:
+  registry:
+    image: registry:2.8.3
+    hostname: registry
+    container_name: registry
+    restart: always
+    environment:
+      REGISTRY_HTTP_ADDR: '0.0.0.0:5001'
+      REGISTRY_STORAGE_DELETE_ENABLED: 'true'
+    ports:
+      - 5001:5001
+    volumes:
+      - /var/lib/docker-registry-cache:/var/lib/registry
+    networks:
+      default:
+        ipv4_address: 172.27.10.254
+    dns:
+      - 172.27.10.250
+#
+networks:
+  default:
+    name: apache.lan
+    external: true
+#
+# ==========================================================================
+# new assumptions
+# sudo nerdctl network create --driver=bridge --ipam-driver=default --subnet 172.27.10.248/29 apachelan
+# 172.27.10.248/29 yields .249 gateway and .250 thru .254 inclusive for hosts; say we reserve as follows:
+# .250 ns
+# .251 mail
+# .252 tbd
+# .253 unassigned
+# .254 registry_cache
+#
+# ==========================================================================

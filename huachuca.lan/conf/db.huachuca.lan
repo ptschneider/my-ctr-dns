@@ -1,0 +1,21 @@
+;
+;
+$TTL	1d
+@	IN	SOA	dns.huachuca.lan. root.huachuca.lan. (
+		        2024120300		; Serial
+				1d		; Refresh
+				1h		; Retry
+				1w		; Expire
+				1h )	; Negative Cache TTL
+;
+ 	IN	NS	dns.huachuca.lan.
+ 	IN	MX 10	mail.huachuca.lan.
+;
+dns.huachuca.lan.		IN	A	172.27.10.250
+mail.huachuca.lan.		IN	A	172.27.10.251
+ableant.huachuca.lan.		IN	A	172.27.10.252
+brightbison.huachuca.lan.	IN	A	172.27.10.253
+registry.huachuca.lan.		IN	A	172.27.10.254
+www.huachuca.lan.		IN	CNAME	ableant.huachuca.lan.
+mongo.huachuca.lan.		IN	CNAME	brightbison.huachuca.lan.
+
