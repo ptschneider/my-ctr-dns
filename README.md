@@ -42,11 +42,7 @@ huachuca.lan
 │   ├── named.conf.local
 │   └── named.conf.options
 ├── log
-│   └── bind
-│       └── default.log
 ├── work
-│   ├── managed-keys.bind
-│   └── managed-keys.bind.jnl
 └── zone
 ```
 
