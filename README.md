@@ -178,6 +178,20 @@ There's also an example for starting an image registry on that subnet (common fo
 ```
 sudo nerdctl compose -f registry-compose.yml up -d
 ```
+For this to work, you need to allow it in your containerd config.
+
+/etc/containerd/certs.d contains entries for each host you allow images to be pulled from. If you wanted to allow the localhost serve images on port 5001, you would create a subdirectory called '127.0.0.1:5001' and have a file witin called hosts.toml that looks like:
+```
+server = "http://localhost:5001"
+
+[host."http://localhost:5001"]
+  capabilities = ["pull","push","resolve"]
+  skip_verify = true
+
+```
+
+skip_verify controls whether or not it is a TLS connection
+
 
 
 
