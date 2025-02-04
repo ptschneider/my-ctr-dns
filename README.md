@@ -46,7 +46,7 @@ huachuca.lan
 └── zone
 ```
 
-You have to create the files under 'conf'. An example below for named.conf:
+You have to create the files under 'conf'. An example below for db.huachuca.lan:
 
 ```
 ;
